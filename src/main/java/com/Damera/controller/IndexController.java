@@ -54,7 +54,7 @@ public class IndexController {
 		return "viewblog";
 	}
 	
-	@PostMapping("/indexsearch")
+	@GetMapping("/indexsearch")
 	public String searchBlogs(@RequestParam("search")String search ,Model model) {
 
 		System.out.println(search);
@@ -63,7 +63,7 @@ public class IndexController {
 		model.addAttribute("blogs", blogs);
 		
 
-		return "index";
+		return "filter-index";
 	}
 
 }

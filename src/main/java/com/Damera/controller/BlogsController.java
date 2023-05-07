@@ -131,7 +131,7 @@ public class BlogsController {
 		return "comments";
 	}
 
-	@PostMapping("/dashboardsearch")
+	@GetMapping("/dashboardsearch")
 	public String getSearchBlogs(@RequestParam("search")String search,Model model) {
 		
 		Integer userId = (Integer)session.getAttribute(AppConstants.SESSION_USERID);
@@ -140,7 +140,7 @@ public class BlogsController {
 		
 		model.addAttribute("blogs", blogs);
 		
-		return "dashboard";
+		return "dashboard-filter";
 	}
 
 
