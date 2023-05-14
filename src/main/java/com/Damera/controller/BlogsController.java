@@ -1,4 +1,4 @@
-package com.Damera.controller;
+package com.damera.controller;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Damera.binding.CreateBlogForm;
-import com.Damera.constants.AppConstants;
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.CommentsEntity;
-import com.Damera.service.BlogsService;
+import com.damera.binding.CreateBlogForm;
+import com.damera.constants.AppConstants;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.CommentsEntity;
+import com.damera.service.BlogsService;
 
 @Controller
 public class BlogsController {

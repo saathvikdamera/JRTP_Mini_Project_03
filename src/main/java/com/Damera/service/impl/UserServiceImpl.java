@@ -1,4 +1,4 @@
-package com.Damera.service.impl;
+package com.damera.service.impl;
 
 import javax.servlet.http.HttpSession;
 
@@ -6,12 +6,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Damera.binding.LoginForm;
-import com.Damera.binding.RegistrationForm;
-import com.Damera.constants.AppConstants;
-import com.Damera.entity.UserDtlsEntity;
-import com.Damera.repo.UserDtlsRepository;
-import com.Damera.service.UserService;
+import com.damera.binding.LoginForm;
+import com.damera.binding.RegistrationForm;
+import com.damera.constants.AppConstants;
+import com.damera.entity.UserDtlsEntity;
+import com.damera.repo.UserDtlsRepository;
+import com.damera.service.UserService;
+import com.damera.utils.PasswordEncrypter;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,9 +22,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private PasswordEncrypter encrypter;
 
 	@Override
-	public String registerUser(RegistrationForm form) {
+	public String registerUser(RegistrationForm form) throws Exception {
 		
 		UserDtlsEntity entity = userRepo.findByEmail(form.getEmail());
 		
@@ -34,14 +38,21 @@ public class UserServiceImpl implements UserService {
 		UserDtlsEntity user = new UserDtlsEntity();
 		BeanUtils.copyProperties(form, user);
 		
+		String encryptPassword = encrypter.encryptPassword(form.getPassword());
+		user.setPassword(encryptPassword);
+		
 		userRepo.save(user);
 		
 		return AppConstants.REGISTRATION_SUCC_MSG;
 	}
 
 	@Override
-	public boolean loginUser(LoginForm form) {
-		UserDtlsEntity entity = userRepo.findByEmailAndPassword(form.getEmail(), form.getPassword());
+	public boolean loginUser(LoginForm form) throws Exception {
+		
+		
+		String encryptPassword = encrypter.encryptPassword(form.getPassword());
+		
+		UserDtlsEntity entity = userRepo.findByEmailAndPassword(form.getEmail(),encryptPassword);
 
 		if(entity == null) {
 			return false;

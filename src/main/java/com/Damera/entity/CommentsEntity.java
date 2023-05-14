@@ -1,4 +1,4 @@
-package com.Damera.entity;
+package com.damera.entity;
 
 import java.time.LocalDate;
 

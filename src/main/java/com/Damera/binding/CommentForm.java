@@ -1,6 +1,5 @@
-package com.Damera.binding;
+package com.damera.binding;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

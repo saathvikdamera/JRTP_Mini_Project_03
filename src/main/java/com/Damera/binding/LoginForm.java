@@ -1,4 +1,4 @@
-package com.Damera.binding;
+package com.damera.binding;
 
 import lombok.Data;
 

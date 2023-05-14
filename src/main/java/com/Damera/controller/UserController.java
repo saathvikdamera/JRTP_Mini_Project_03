@@ -1,4 +1,4 @@
-package com.Damera.controller;
+package com.damera.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.Damera.binding.LoginForm;
-import com.Damera.binding.RegistrationForm;
-import com.Damera.constants.AppConstants;
-import com.Damera.service.UserService;
+import com.damera.binding.LoginForm;
+import com.damera.binding.RegistrationForm;
+import com.damera.constants.AppConstants;
+import com.damera.service.UserService;
 
 @Controller
 public class UserController {
@@ -25,7 +25,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/login")
-	public String loginUser(@ModelAttribute("loginform") LoginForm form,Model model) {
+	public String loginUser(@ModelAttribute("loginform") LoginForm form,Model model) throws Exception {
 		
 		boolean status = service.loginUser(form);
 		
@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/register")
-	public String registerUser(@ModelAttribute("registerform") RegistrationForm form,Model model) {
+	public String registerUser(@ModelAttribute("registerform") RegistrationForm form,Model model) throws Exception {
 		
 		String status = service.registerUser(form);
 		

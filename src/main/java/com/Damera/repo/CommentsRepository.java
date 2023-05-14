@@ -1,4 +1,4 @@
-package com.Damera.repo;
+package com.damera.repo;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.CommentsEntity;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.CommentsEntity;
 
 public interface CommentsRepository extends JpaRepository<CommentsEntity, Integer> {
 

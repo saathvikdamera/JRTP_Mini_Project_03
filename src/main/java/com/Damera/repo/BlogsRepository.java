@@ -1,12 +1,12 @@
-package com.Damera.repo;
+package com.damera.repo;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.UserDtlsEntity;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.UserDtlsEntity;
 
 public interface BlogsRepository extends JpaRepository<BlogsEntity, Integer> {
 	

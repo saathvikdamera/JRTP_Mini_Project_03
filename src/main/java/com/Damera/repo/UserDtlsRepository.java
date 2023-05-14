@@ -1,8 +1,8 @@
-package com.Damera.repo;
+package com.damera.repo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.Damera.entity.UserDtlsEntity;
+import com.damera.entity.UserDtlsEntity;
 
 public interface UserDtlsRepository extends JpaRepository<UserDtlsEntity, Integer> {
 	

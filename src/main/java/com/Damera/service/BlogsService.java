@@ -1,10 +1,10 @@
-package com.Damera.service;
+package com.damera.service;
 
 import java.util.List;
 
-import com.Damera.binding.CreateBlogForm;
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.CommentsEntity;
+import com.damera.binding.CreateBlogForm;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.CommentsEntity;
 
 public interface BlogsService {
 

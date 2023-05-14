@@ -1,18 +1,19 @@
-package com.Damera.service.impl;
+package com.damera.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Damera.binding.CommentForm;
-import com.Damera.constants.AppConstants;
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.CommentsEntity;
-import com.Damera.repo.BlogsRepository;
-import com.Damera.repo.CommentsRepository;
-import com.Damera.service.IndexService;
+import com.damera.binding.CommentForm;
+import com.damera.constants.AppConstants;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.CommentsEntity;
+import com.damera.repo.BlogsRepository;
+import com.damera.repo.CommentsRepository;
+import com.damera.service.IndexService;
 
 @Service
 public class IndexServiceImpl implements IndexService {
@@ -33,7 +34,14 @@ public class IndexServiceImpl implements IndexService {
 	
 	@Override
 	public BlogsEntity getBlog(Integer blogId) {
-		BlogsEntity blog = blogRepo.findById(blogId).get();
+		
+		BlogsEntity blog = null;
+		
+		Optional<BlogsEntity> findById = blogRepo.findById(blogId);
+		if(findById.isPresent()) {
+			blog = findById.get();
+		}
+
 		return blog;
 	}
 	
@@ -41,7 +49,12 @@ public class IndexServiceImpl implements IndexService {
 	public List<CommentsEntity> addComment(CommentForm form) {
 		
 		Integer blogId = form.getBlogId();
-		BlogsEntity blog = blogRepo.findById(blogId).get();
+		BlogsEntity blog = null;
+		
+		Optional<BlogsEntity> findById = blogRepo.findById(blogId);
+		if(findById.isPresent()) {
+			blog = findById.get();
+		}
 		
 		CommentsEntity comment = new CommentsEntity();
 		BeanUtils.copyProperties(form, comment);

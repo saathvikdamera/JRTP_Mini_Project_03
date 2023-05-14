@@ -1,12 +1,12 @@
-package com.Damera.service;
+package com.damera.service;
 
-import com.Damera.binding.LoginForm;
-import com.Damera.binding.RegistrationForm;
+import com.damera.binding.LoginForm;
+import com.damera.binding.RegistrationForm;
 
 public interface UserService {
 
-	String registerUser(RegistrationForm form);
+	String registerUser(RegistrationForm form) throws Exception;
 	
-	boolean loginUser(LoginForm form);
+	boolean loginUser(LoginForm form) throws Exception;
 	
 }

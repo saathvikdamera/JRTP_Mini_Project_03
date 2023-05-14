@@ -1,4 +1,4 @@
-package com.Damera.controller;
+package com.damera.controller;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.Damera.binding.CommentForm;
-import com.Damera.entity.BlogsEntity;
-import com.Damera.entity.CommentsEntity;
-import com.Damera.service.IndexService;
+import com.damera.binding.CommentForm;
+import com.damera.entity.BlogsEntity;
+import com.damera.entity.CommentsEntity;
+import com.damera.service.IndexService;
 
 @Controller
 public class IndexController {
