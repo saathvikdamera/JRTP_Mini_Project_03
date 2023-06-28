@@ -38,8 +38,8 @@ public class UserServiceImpl implements UserService {
 		UserDtlsEntity user = new UserDtlsEntity();
 		BeanUtils.copyProperties(form, user);
 		
-		String encryptPassword = encrypter.encryptPassword(form.getPassword());
-		user.setPassword(encryptPassword);
+		//String encryptPassword = encrypter.encryptPassword(form.getPassword());
+		user.setPassword(form.getPassword());
 		
 		userRepo.save(user);
 		
@@ -49,10 +49,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean loginUser(LoginForm form) throws Exception {
 		
+		//String encryptPassword = encrypter.encryptPassword(form.getPassword());
 		
-		String encryptPassword = encrypter.encryptPassword(form.getPassword());
-		
-		UserDtlsEntity entity = userRepo.findByEmailAndPassword(form.getEmail(),encryptPassword);
+		UserDtlsEntity entity = userRepo.findByEmailAndPassword(form.getEmail(),form.getPassword());
 
 		if(entity == null) {
 			return false;
