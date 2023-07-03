@@ -26,4 +26,6 @@ public class AppConstants {
 	
 	public static final String COMMENT_DELETION_ERROR = "Failed deletion";
 	
+	public static final String SECRET_KEY = "AshokIT";
+	
 }

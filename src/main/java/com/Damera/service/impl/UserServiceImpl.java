@@ -12,54 +12,59 @@ import com.damera.constants.AppConstants;
 import com.damera.entity.UserDtlsEntity;
 import com.damera.repo.UserDtlsRepository;
 import com.damera.service.UserService;
-import com.damera.utils.PasswordEncrypter;
+import com.damera.utils.AESPasswordEncrypter;
 
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserDtlsRepository userRepo;
-	
+
 	@Autowired
 	private HttpSession session;
-	
+
 	@Autowired
-	private PasswordEncrypter encrypter;
+	private AESPasswordEncrypter encrypter;
 
 	@Override
 	public String registerUser(RegistrationForm form) throws Exception {
-		
+
 		UserDtlsEntity entity = userRepo.findByEmail(form.getEmail());
-		
-		if(entity != null) {
+
+		if (entity != null) {
 			return AppConstants.EMAIL_EXIST_MSG;
 		}
-		
+
 		UserDtlsEntity user = new UserDtlsEntity();
 		BeanUtils.copyProperties(form, user);
-		
-		//String encryptPassword = encrypter.encryptPassword(form.getPassword());
-		user.setPassword(form.getPassword());
-		
+
+		String encryptedPwd = encrypter.encrypt(form.getPassword(), AppConstants.SECRET_KEY);
+		user.setPassword(encryptedPwd);
+
 		userRepo.save(user);
-		
+
 		return AppConstants.REGISTRATION_SUCC_MSG;
 	}
 
 	@Override
 	public boolean loginUser(LoginForm form) throws Exception {
-		
-		//String encryptPassword = encrypter.encryptPassword(form.getPassword());
-		
-		UserDtlsEntity entity = userRepo.findByEmailAndPassword(form.getEmail(),form.getPassword());
 
-		if(entity == null) {
+		UserDtlsEntity userDtlsEntity = userRepo.findByEmail(form.getEmail());
+
+		if (userDtlsEntity == null) {
 			return false;
 		}
-		
-		session.setAttribute(AppConstants.SESSION_USERID, entity.getUserId());
-		
+
+		String decryptedPwd = encrypter.decrypt(userDtlsEntity.getPassword(), AppConstants.SECRET_KEY);
+
+		if (!form.getPassword().equals(decryptedPwd)) {
+			return false;
+		}
+
+		session.setAttribute(AppConstants.SESSION_USERID, userDtlsEntity.getUserId());
+
 		return true;
+		
 	}
 
 }
